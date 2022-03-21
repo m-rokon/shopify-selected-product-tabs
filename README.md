@@ -5,3 +5,8 @@ This is a custom section for shopify's product tabs
 ## How it will look like?
 
 ![product tabs](https://prnt.sc/zy8eTH4ZRFZU)
+
+## Check demo
+
+Go to this link: [https://custom-product-selection-tab.myshopify.com/](https://custom-product-selection-tab.myshopify.com/)
+Password is: `test`
