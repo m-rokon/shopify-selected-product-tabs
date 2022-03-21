@@ -1,0 +1,62 @@
+<!-- font awesome -->
+{{ '//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css' | stylesheet_tag }}
+
+<section class="product-tabs-section container">
+
+    <div class="product-tabs-row">
+        <div id="product-tab" class="tab-list">
+            {% for block in section.blocks %}
+                {% assign product = all_products[block.settings.custom_product] %}
+                <button class="tab-btn" data-tab="{{ section.id }}-{{ product.title }}-content"> {% if product != blank %} {{ product.title }} {% else %} Argan oil {% endif %} <i class="fa-solid fa-chevron-right cheveron-icon"></i></button>
+            {% endfor %}
+        </div>
+        <div id="product-details-col">
+            {% for block in section.blocks %}
+                {% assign product = all_products[block.settings.custom_product] %}
+                <div id="{{ section.id }}-{{ product.title }}-content" class="product-details">
+                    <img src="{% if product != blank %} {{ product.featured_image | image_url: width: 250 }} {% else %} https://images.unsplash.com/photo-1635868388707-ee8156aaaad7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1100 {% endif %}" width="250" height="auto" alt="{{ product.featured_image.alt }}" loading="lazy">
+                    <h2>{% if product != blank %} {{ product.title }} {% else %} Argan oil {% endif %}</h2>
+                    <p>{% if product != blank %} {{ product.description }} {% else %} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt dolorem, ipsa recusandae dolorum facere vel nihil exercitationem modi perspiciatis obcaecati nostrum doloremque. Laboriosam quaerat omnis enim exercitationem fugit iste asperiores. {% endif %}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{{ 'product-selection-css.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-selection-js.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Custom product tab",
+  "blocks": [
+    {
+      "name": "Product",
+      "type": "product_list",
+      "settings": [
+        {
+          "type": "product",
+          "id": "custom_product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product tabs",
+      "blocks": [
+          {
+              "type": "product_list"
+          },
+          {
+              "type": "product_list"
+          },
+          {
+              "type": "product_list"
+          }
+      ]
+    }
+  ]
+}
+{% endschema %}
